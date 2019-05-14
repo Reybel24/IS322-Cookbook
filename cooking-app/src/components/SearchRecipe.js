@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import * as actions from "../actions";
 
+const WAIT_INTERVAL  = 1000;
+const ENTER_KEY = 13;
 
 class SearchRecipe extends React.Component {
 
@@ -15,6 +17,31 @@ class SearchRecipe extends React.Component {
         this.getData(this.state.searchPhrase);
     }
 
+    componentWillMount() {
+        this.timer=null;
+    }
+
+    handleChange(value) {
+        clearTimeout(this.timer);
+
+        this.setState({value});
+
+        this.timer = setTimeout(::triggerChange, WAIT_INTERVAL)
+    }
+
+    handleKeyDown(e) {
+        if (e.keyCode === ENTER_KEY) {
+            ::this.triggerChange()
+        }
+    }
+
+    triggerChange(){
+        const {value} = this.state;
+
+        this.props.onChange(value);
+    }
+
+
     getData(searchPhrase) {
     //    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=false&ingredients=" + searchPhrase,
       //      {
@@ -24,7 +51,7 @@ class SearchRecipe extends React.Component {
               //  }
             //})
 
-        axios.get("https://my-json-server.typicode.com/amishin/Cooking-App/recipies")
+        axios.get("https://my-json-server.typicode.com/amishin/Cooking-App/recipe")
             .then(response => {
                 this.props.recipiesLoaded(response.data);
             }).catch(error => {
@@ -43,15 +70,26 @@ class SearchRecipe extends React.Component {
 
     renderBody() {
         return <div>
-            <div><input onChange={event=>this.searchTextChanged(event.target.value)}/></div>
-            <div> {this.props.recipies.length} List of recipies ....</div>
+            <div> <input type={"text"}
+                         value={this.state.value}
+                         onKeyDown={::this.handleChange()}
+                         onChange={::this.handleChange} {event=>this.searchTextChanged(event.target.value)}/>
+            </div>
+
+            <div> {this.props.recipies.map((recipe) => {
+                return (
+                    <div key={recipe.id}>
+                        <img src={recipe.image} alt={recipe.name} />
+                        <p> {recipe.name} </p>
+                    </div>
+                )
+            })} </div>
         </div>
     }
 
     render() {
         return this.renderBody();
         //this.props.errorMessage ? <div>{this.props.errorMessage}</div> :
-            this.renderBody();
     }
 }
 
