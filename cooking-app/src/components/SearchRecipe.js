@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux';
 
 import * as actions from "../actions";
@@ -14,7 +13,7 @@ class SearchRecipe extends React.Component {
     }
 
     componentDidMount() {
-        this.getData(this.state.searchPhrase);
+        this.props.searchRecipe(this.state.searchPhrase);
     }
 
     componentWillMount() {
@@ -23,64 +22,34 @@ class SearchRecipe extends React.Component {
 
     handleChange(value) {
         clearTimeout(this.timer);
-
-        this.setState({value});
-
-        this.timer = setTimeout(::triggerChange, WAIT_INTERVAL)
+        this.setState({searchPhrase: value});
+        this.timer = setTimeout(()=>this.triggerChange(), WAIT_INTERVAL)
     }
 
     handleKeyDown(e) {
         if (e.keyCode === ENTER_KEY) {
-            ::this.triggerChange()
+            clearTimeout(this.timer);
+            this.triggerChange()
         }
     }
 
     triggerChange(){
-        const {value} = this.state;
-
-        this.props.onChange(value);
-    }
-
-
-    getData(searchPhrase) {
-    //    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=false&ingredients=" + searchPhrase,
-      //      {
-        //        'headers': {
-          //          "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            //        "X-RapidAPI-Key": "d845af67f1msha67d3caa7ea0331p17fd03jsn1411e9aae2eb"
-              //  }
-            //})
-
-        axios.get("https://my-json-server.typicode.com/amishin/Cooking-App/recipe")
-            .then(response => {
-                this.props.recipiesLoaded(response.data);
-            }).catch(error => {
-            console.log(error);
-            this.props.recipeError(error.response.data.message);
-        });
-    }
-
-    searchTextChanged(newSearchPhrase) {
-        console.log(newSearchPhrase);
-        this.getData(newSearchPhrase);
-        this.setState({
-            searchPhrase : newSearchPhrase
-        });
+        this.props.searchRecipe(this.state.searchPhrase);
     }
 
     renderBody() {
         return <div>
             <div> <input type={"text"}
-                         value={this.state.value}
-                         onKeyDown={::this.handleChange()}
-                         onChange={::this.handleChange} {event=>this.searchTextChanged(event.target.value)}/>
+                         value={this.state.searchPhrase}
+                         onKeyDown={event=>this.handleKeyDown(event)}
+                         onChange={event=>this.handleChange(event.target.value)}/>
             </div>
 
             <div> {this.props.recipies.map((recipe) => {
                 return (
                     <div key={recipe.id}>
                         <img src={recipe.image} alt={recipe.name} />
-                        <p> {recipe.name} </p>
+                        <p> {recipe.title} </p>
                     </div>
                 )
             })} </div>
@@ -88,8 +57,7 @@ class SearchRecipe extends React.Component {
     }
 
     render() {
-        return this.renderBody();
-        //this.props.errorMessage ? <div>{this.props.errorMessage}</div> :
+        return this.props.errorMessage ? <div>{this.props.errorMessage}</div> : this.renderBody();
     }
 }
 
@@ -102,8 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchtoProps = dispatch => {
     return {
-        recipiesLoaded: recepies => dispatch(actions.recipiesLoaded(recepies)),
-        recipeError: errorMessage => dispatch(actions.recipeError(errorMessage))
+        searchRecipe: searchPhrase => dispatch(actions.searchRecipe(searchPhrase)),
     }
 };
 
