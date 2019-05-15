@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const DEFAULT_STATE = {
-    nutritions: '',
+    answer: null,
+    image: null,
     errorMessage: null
 }
 
@@ -10,14 +11,16 @@ const nutritionReducer = (state = DEFAULT_STATE, action) => {
         case actionTypes.NUTRITIONS_LOADED_SUCCESS:
             return {
                 ...state,
-                nutritions: action.payload,
+                answer: action.payload.answer,
+                image: action.payload.image,
                 errorMessage: null
             };
         case actionTypes.NUTRITIONS_LOADED_ERROR:
             return {
                 ...state,
                 errorMessage: action.payload,
-                nutritions: []
+                answer: null,
+                image: null
             }
 
         default:

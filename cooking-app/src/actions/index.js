@@ -11,25 +11,23 @@ export const searchRecipe = (searchPhrase) => {
                 "X-RapidAPI-Key": "6cd2deda84msh110074a9ca39d73p1d86d2jsna86639596f04"
           }
         })
-
-        //console.log("SerachRecipies:", searchPhrase);
        // axios.get("https://my-json-server.typicode.com/amishin/Cooking-App/recipe")
             .then(response => {
-                dispatch(recipiesLoaded(response.data));
+                dispatch(recipiesLoadingSuccess(response.data));
             }).catch(error => {
-            dispatch(recipeError(error.response.data.message));
+            dispatch(recipeLoadingError(error.response.data.message));
         });
     };
 };
 
-const recipeError = errorMessage => {
+const recipeLoadingError = errorMessage => {
     return {
         type: actionTypes.RECIPIES_LOADED_ERROR,
         payload: errorMessage
     }
 };
 
-const recipiesLoaded  = recipies => {
+const recipiesLoadingSuccess  = recipies => {
     console.log("Loaded:", recipies);
     return {
         type: actionTypes.RECIPIES_LOADED_SUCCESS,
@@ -38,36 +36,35 @@ const recipiesLoaded  = recipies => {
 };
 
 // Search Nutritions Actions
-
-
-export const searchNutrition = (searchQuestion) => {
+export const searchNutritions = (searchQuestion) => {
     return (dispatch) => {
-        //    axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ignorePantry=false&ingredients=" + searchPhrase,
-        //      {
-        //        'headers': {
-        //          "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        //        "X-RapidAPI-Key": "d845af67f1msha67d3caa7ea0331p17fd03jsn1411e9aae2eb"
-        //  }
-        //})
-
         console.log("SerachNutrition:", searchQuestion);
-        axios.get("https://my-json-server.typicode.com/amishin/Cooking-Question/db")
+        axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=" + searchQuestion,
+        {
+            'headers': {
+            "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                "X-RapidAPI-Key": "6cd2deda84msh110074a9ca39d73p1d86d2jsna86639596f04"
+        }
+        })
+
+//        axios.get("https://my-json-server.typicode.com/amishin/Cooking-Question/db")
             .then(response => {
-                dispatch(nutritionsLoaded(response.data));
+                dispatch(nutritionsLoadingSuccess(response.data));
             }).catch(error => {
-            dispatch(nutritionsError(error.response.data.message));
+            dispatch(nutritionsLoadingError(error));
         });
     };
 };
 
-const nutritionsError = errorMessage => {
+const nutritionsLoadingError = errorMessage => {
+    console.log("Error:", errorMessage);
     return {
         type: actionTypes.NUTRITIONS_LOADED_ERROR,
-        payload: errorMessage
+        payload: "Request failed, please try again later"
     }
 };
 
-const nutritionsLoaded  = nutritions => {
+const nutritionsLoadingSuccess  = nutritions => {
     console.log("Loaded:", nutritions);
     return {
         type: actionTypes.NUTRITIONS_LOADED_SUCCESS,
