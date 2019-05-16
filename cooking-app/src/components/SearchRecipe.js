@@ -60,6 +60,10 @@ class SearchRecipe extends React.Component {
                     </div>
                 )
             })} </div>
+
+            <div className={'footer'}>
+                <p className={'footer-par'}>Project Created For IS322 | Spring 2019 </p>
+            </div>
         </div>)
     }
 
