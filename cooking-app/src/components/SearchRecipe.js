@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import '../CSS/App.css';
 
 import * as actions from "../actions";
 
@@ -38,8 +39,11 @@ class SearchRecipe extends React.Component {
     }
 
     renderBody() {
-        return <div>
+        return (
+        <div className={'page-body-container'}>
+            <h1 className={'page-title'}> Search Thousands of Recipes By Ingredients </h1>
             <div> <input type={"text"}
+                         className={'search-bar'}
                          value={this.state.searchPhrase}
                          onKeyDown={event=>this.handleKeyDown(event)}
                          onChange={event=>this.handleChange(event.target.value)}/>
@@ -53,7 +57,7 @@ class SearchRecipe extends React.Component {
                     </div>
                 )
             })} </div>
-        </div>
+        </div>)
     }
 
     render() {

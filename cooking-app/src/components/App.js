@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter, Route} from "react-router-dom";
+import '../CSS/App.css';
 
 import PageTabs from './PageTabs';
 //import Homepage from './Homepage';
@@ -9,7 +10,7 @@ import SearchNutritions from './SearchNutritions';
 
 const App = () => {
     return (
-        <div>
+        <div className='nav-container'>
             <BrowserRouter>
             <PageTabs/>
             <div>

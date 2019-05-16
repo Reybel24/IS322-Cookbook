@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/App.css';
 
 class PageTabs extends React.Component {
     state = { currentPage: '/' }
@@ -18,19 +19,19 @@ class PageTabs extends React.Component {
             <li className='nav-item'>
             <Link className={this.isActiveTab('/')} to="/"
         onClick={event => this.onTabClick(event, '/')}>
-        Homepage
+        Explore Recipes
         </Link>
         </li>
         <li className='nav-item'>
             <Link className={this.isActiveTab('/SearchRecipe')} to="/SearchRecipe"
         onClick={event => this.onTabClick(event, '/SearchRecipe')}>
-        Search Recipe
+        Search Recipes
         </Link>
         </li>
         <li className='nav-item'>
             <Link className={this.isActiveTab('/SearchNutritions')} to="/SearchNutritions"
         onClick={event => this.onTabClick(event, '/SearchNutritions')}>
-        Search Nutritions
+        Ask A Question
         </Link>
         </li>
         </ul>

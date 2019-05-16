@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import '../CSS/App.css';
 
 import * as actions from "../actions";
 
@@ -23,7 +24,9 @@ class SearchNutritions extends React.Component {
 
     render() {
         const img = this.props.image ? <img src={this.props.image} /> : null;
-        return <div>
+        return (
+        <div className={'page-body-container'}>
+            <h1 className={'page-title'}> Ask A Nutrition Question </h1>
             <div> <input type={"text"}
                          value={this.state.searchQuestion}
                          onChange={event=>this.handleChange(event.target.value)}/>
@@ -33,8 +36,8 @@ class SearchNutritions extends React.Component {
                 <p> {this.props.errorMessage ? this.props.errorMessage : this.props.answer} </p>
                 {img}
             </div>
-        </div>;
-    }
+        </div>);
+     }
 }
 
 const mapStateToProps = (state) => {
