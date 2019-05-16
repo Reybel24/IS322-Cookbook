@@ -41,13 +41,16 @@ class SearchRecipe extends React.Component {
     renderBody() {
         return (
         <div className={'page-body-container'}>
-            <h1 className={'page-title'}> Search Thousands of Recipes By Ingredients </h1>
-            <div> <input type={"text"}
-                         className={'search-bar'}
+            <div className={'title-container'}>
+                <h1 className={'page-title'}> Search Thousands of Recipes By Ingredients </h1>
+            </div>
+                <div className={'search-bar'}>
+                    <input type={"text"}
+                           placeholder={'Enter An Ingredient...'}
                          value={this.state.searchPhrase}
                          onKeyDown={event=>this.handleKeyDown(event)}
                          onChange={event=>this.handleChange(event.target.value)}/>
-            </div>
+                </div>
 
             <div> {this.props.recipies.map((recipe) => {
                 return (

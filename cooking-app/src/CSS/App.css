@@ -1,20 +1,68 @@
 /*NAVIGATION STYLE*/
-
 .nav-container {
-    background-color: orange;
+    background-color: aliceblue;
+    margin-top: 20px;
+}
+
+.list-element {
+    height: 60px;
+    background-color: #d3e5ff;
+}
+
+.nav-item {
+    font-weight: bold;
+    font-family: Roboto;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9px;
 }
 
 /*BODY STYLE*/
 .page-body-container {
-     background-color: yellow;
+    margin-top: 50px;
+     background-color: aliceblue;
 }
 
 /*TITLE STYLE*/
+.page-title {
+    text-align: center;
+    font-size: 30px;
+    font-family: Roboto;
+    font-weight: bold;
+    color: #0081ff;
+}
 
 /*SEARCH BOX STYLE*/
+input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 35%;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    color: #0081ff;
+ }
 
 /*SEARCH BOX BUTTON STYLE*/
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    border: solid 2px #0081ff;
+    background-color: transparent;
+    padding: 5px 5px;
+    width: 35%;
+    border-radius: 2px;
+    color: grey;
+}
 
+button:hover {
+    background-color: #0081ff;
+    color: white;
+}
 /*RESULTS STYLE*/
 
 /*FOOTER STYLE*/

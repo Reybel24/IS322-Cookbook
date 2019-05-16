@@ -28,6 +28,7 @@ class SearchNutritions extends React.Component {
         <div className={'page-body-container'}>
             <h1 className={'page-title'}> Ask A Nutrition Question </h1>
             <div> <input type={"text"}
+                         placeholder={'Enter a Nutrition Question...'}
                          value={this.state.searchQuestion}
                          onChange={event=>this.handleChange(event.target.value)}/>
                 <button onClick={()=>this.submitQuestion()}>Ask</button>
