@@ -23,7 +23,7 @@ class SearchNutritions extends React.Component {
     }
 
     render() {
-        const img = this.props.image ? <img src={this.props.image} /> : null;
+        const img = this.props.image ? <img src={this.props.image} className={'nutrition-image'} /> : null;
         return (
         <div className={'page-body-container'}>
             <h1 className={'page-title'}> Ask A Nutrition Question </h1>
@@ -34,7 +34,7 @@ class SearchNutritions extends React.Component {
                 <button onClick={()=>this.submitQuestion()}>Ask</button>
             </div>
             <div>
-                <p> {this.props.errorMessage ? this.props.errorMessage : this.props.answer} </p>
+                <p className={'nutrition-answer'}> {this.props.errorMessage ? this.props.errorMessage : this.props.answer} </p>
                 {img}
             </div>
             <div className={'footer'}>

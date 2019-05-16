@@ -18,6 +18,10 @@
     margin-top: 9px;
 }
 
+.nav-page-tabs {
+    display: flex;
+    list-style-type: none;
+}
 /*BODY STYLE*/
 .page-body-container {
     margin-top: 50px;
@@ -66,11 +70,55 @@ button:hover {
 
 /*RESULTS STYLE*/
 
+.recipe-box {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.recipe_image {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    width: 50%;
+}
+
+.recipe-title {
+    color: #0081ff;
+    font-family: Roboto;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.nutrition-answer {
+    color: #0081ff;
+    font-family: Roboto;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.nutrition-image {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    width: 30%;
+    margin-bottom: 50px;
+}
+
 /*FOOTER STYLE*/
 .footer {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    bottom: 10px;
+    bottom: 0px;
     height: 40px;
     background-color: #d3e5ff;
 }
@@ -81,3 +129,17 @@ button:hover {
     margin-top: 7px;
 }
 /*RESPONSIVE STYLE*/
+@media only screen and (max-width: 767px) {
+    .nav-page-tabs {
+        flex-direction: column;
+        height: 100px;
+    }
+
+    .nav-item {
+        text-align: center;
+    }
+
+    .list-element {
+        height: 160px;
+    }
+}

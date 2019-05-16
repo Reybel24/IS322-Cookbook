@@ -52,11 +52,11 @@ class SearchRecipe extends React.Component {
                          onChange={event=>this.handleChange(event.target.value)}/>
                 </div>
 
-            <div> {this.props.recipies.map((recipe) => {
+            <div className={'results'}> {this.props.recipies.map((recipe) => {
                 return (
-                    <div key={recipe.id}>
-                        <img src={recipe.image} alt={recipe.name} />
-                        <p> {recipe.title} </p>
+                    <div className={'recipe-box'} key={recipe.id}>
+                        <img src={recipe.image} alt={recipe.name} className={'recipe_image'} />
+                        <p className={'recipe-title'}> {recipe.title} </p>
                     </div>
                 )
             })} </div>
