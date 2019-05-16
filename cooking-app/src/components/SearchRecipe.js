@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import '../CSS/App.css';
 
 import * as actions from "../actions";
@@ -56,7 +57,7 @@ class SearchRecipe extends React.Component {
                 return (
                     <div className={'recipe-box'} key={recipe.id}>
                         <img src={recipe.image} alt={recipe.name} className={'recipe_image'} />
-                        <p className={'recipe-title'}> {recipe.title} </p>
+                        <Link to={{pathname: '/VariableRecipe/${recipe.id}'}}> <p className={'recipe-title'}> {recipe.title} </p> </Link>
                     </div>
                 )
             })} </div>
