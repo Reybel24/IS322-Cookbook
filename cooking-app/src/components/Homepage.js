@@ -1,17 +1,64 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {connect} from 'react-redux';
+import * as actions from "../actions";
 
-import App from './components/App';
-import reducers from './reducers';
-import thunk from 'redux-thunk';
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// Components
+import FeaturedItems from "./FeaturedRecipies";
 
-const store = createStore(reducers, composeEnhancer(applyMiddleware(thunk)));
-ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.querySelector('#root')
-);
+// Variables and such
+const ENTER_KEY = 13;
+
+class Homepage extends React.Component {
+    state = {
+        searchPhrase: ''
+    }
+
+    handleKeyDown(e) {
+        if (e.keyCode === ENTER_KEY) {
+            clearTimeout(this.timer);
+            this.triggerChange()
+        }
+    }
+
+    triggerChange() {
+        this.props.searchRecipe(this.state.searchPhrase);
+    }
+
+    render() {
+        return <div>
+            <div>
+                <select name="filters" value={this.state.searchPhrase} onChange={event=>this.handleChange(event.target.value)}>
+                    <option value="gluten_free">Gluten free</option>
+                    <option value="sugar_free">Sugar Free</option>
+                    <option value="chocolate">Chocolate</option>
+                </select>
+            </div>
+            <div> {this.props.recipies.map((recipe) => {
+                return (
+                    <div key={recipe.id}>
+                        <img src={recipe.image} alt={recipe.name} />
+                        <p> {recipe.title} </p>
+                    </div>
+                )
+            })}
+            </div>
+
+            <FeaturedItems />
+        </div>
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        errorMessage: state.recipies.errorMessage,
+        recipies: state.recipies.recipies
+    };
+};
+
+const mapDispatchtoProps = dispatch => {
+    return {
+        searchRecipe: searchPhrase => dispatch(actions.searchRecipe(searchPhrase)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Homepage);

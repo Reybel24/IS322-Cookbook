@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {BrowserRouter, Route} from "react-router-dom";
 
 import PageTabs from './PageTabs';
-//import Homepage from './Homepage';
+import Homepage from './Homepage';
 import SearchRecipe from './SearchRecipe';
 import SearchNutritions from './SearchNutritions';
 
@@ -13,7 +13,7 @@ const App = () => {
             <BrowserRouter>
             <PageTabs/>
             <div>
-                {/*<Route path="/" exact component={Homepage} />*/}
+                <Route path="/Homepage" component={Homepage} />
                 <Route path="/SearchRecipe" component={SearchRecipe} />
                 <Route path="/SearchNutritions" component={SearchNutritions} />
             </div>

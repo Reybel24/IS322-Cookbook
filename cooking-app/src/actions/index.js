@@ -71,3 +71,41 @@ const nutritionsLoadingSuccess  = nutritions => {
         payload: nutritions
     }
 };
+
+
+// Featured recipes action
+export const getFeaturedRecipies = (filters) => {
+    console.log("Testingabc");
+    return (dispatch) => {
+        axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?targetCalories=2000&timeFrame=day",
+            {
+                'headers': {
+                    "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                    "X-RapidAPI-Key": "6cd2deda84msh110074a9ca39d73p1d86d2jsna86639596f04"
+                }
+            })
+            .then(response => {
+                dispatch(featuredLoadingSuccess(response.data));
+            }).catch(error => {
+                dispatch(featuredLoadingError(error.response.data.message));
+        });
+    };
+};
+
+const featuredLoadingSuccess  = recipies => {
+    console.log("success");
+    console.log("Loaded: ", recipies);
+    return {
+        type: actionTypes.FEATURED_LOADED_SUCCESS,
+        payload: recipies
+    }
+};
+
+const featuredLoadingError = errorMessage => {
+    console.log("error");
+    console.log("Error: ", errorMessage);
+    return {
+        type: actionTypes.FEATURED_LOADED_ERROR,
+        payload: errorMessage
+    }
+};

@@ -16,8 +16,8 @@ class PageTabs extends React.Component {
         return (
             <ul className='nav page-tabs'>
             <li className='nav-item'>
-            <Link className={this.isActiveTab('/')} to="/"
-        onClick={event => this.onTabClick(event, '/')}>
+            <Link className={this.isActiveTab('/')} to="/Homepage"
+        onClick={event => this.onTabClick(event, '/Homepage')}>
         Homepage
         </Link>
         </li>
