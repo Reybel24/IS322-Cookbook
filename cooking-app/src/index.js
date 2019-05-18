@@ -9,13 +9,15 @@ import reducers from './reducers';
 import thunk from 'redux-thunk';
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+// Create the store
 const store = createStore(reducers, composeEnhancer(applyMiddleware(thunk)));
+
+// Make it available to all our components
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.querySelector('#root')
 );
-
 
 

@@ -71,3 +71,68 @@ const nutritionsLoadingSuccess  = nutritions => {
         payload: nutritions
     }
 };
+
+
+// Featured recipes action
+export const getFeaturedRecipes = (allItemsList, featured) => {
+    return (dispatch) => {
+        for (var i=0; i < 1; i++)
+        {
+            axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1&tags=vegetarian%2Cdessert",
+                {
+                    'headers': {
+                        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                        "X-RapidAPI-Key": "6cd2deda84msh110074a9ca39d73p1d86d2jsna86639596f04"
+                    }
+                })
+                .then(response => {
+                    // Add to list
+                    featured.push(response.data);
+                    console.log("added");
+                }).catch(error => {
+                //dispatch(featuredLoadingError(error.response.data.message));
+                console.log(error);
+            });
+        }
+        dispatch(featuredLoadingSuccess(featured));
+
+    };
+};
+
+const featuredLoadingSuccess  = recipes => {
+    //console.log("Loaded: ", recipes);
+    return {
+        type: actionTypes.FEATURED_LOADED_SUCCESS,
+        payload: recipes
+    }
+};
+
+const featuredLoadingError = errorMessage => {
+    errorMessage = (errorMessage == null) ? 'unknown error' : errorMessage;
+    console.log("Error: ", errorMessage);
+    return {
+        type: actionTypes.FEATURED_LOADED_ERROR,
+        payload: errorMessage
+    }
+};
+
+
+
+// Setting a filter
+export const setVisibilityFilter = (filter) => {
+    console.log("Filters set to show: ", filter);
+    return (dispatch) => {
+        console.log("HEYY");
+        // filter items based on filter here
+
+        filterSuccess(filter);
+    };
+};
+
+const filterSuccess = filter => {
+    console.log("GGG");
+    return {
+        type: actionTypes.SET_VISIBILITY_FILTER,
+        payload: filter
+    }
+};
