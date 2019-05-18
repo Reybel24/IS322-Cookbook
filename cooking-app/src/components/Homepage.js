@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as actions from "../actions";
 
 // Components
-import FeaturedItems from "./FeaturedRecipies";
+import FeaturedRecipes from "./FeaturedRecipies";
 import {setVisibilityFilter} from "../actions";
 
 // Variables and such
@@ -38,15 +38,7 @@ class Homepage extends React.Component {
 
     render() {
         return <div>
-            <div>
-                <select id="filter_diet" name="filter_diet" onChange={event=>this.updateFilter()}>
-                    <option value="gluten_free">Gluten free</option>
-                    <option value="sugar_free">Sugar Free</option>
-                    <option value="chocolate">Chocolate</option>
-                </select>
-            </div>
-
-            <FeaturedItems />
+            <FeaturedRecipes />
         </div>
     }
 }

@@ -18,7 +18,7 @@ class PageTabs extends React.Component {
             <div className={'list-element'}>
                 <ul className='nav-page-tabs'>
                     <li className='nav-item'>
-                        <Link className={this.isActiveTab('/')} to="/"
+                        <Link className={this.isActiveTab('/Homepage')} to="/Homepage"
                               onClick={event => this.onTabClick(event, '/')}>
                                 Explore Recipes
                         </Link>

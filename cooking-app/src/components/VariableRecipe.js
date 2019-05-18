@@ -6,6 +6,12 @@ class VariableRecipe extends React.Component {
         this.props.history.push(`/`);
     }
 
+    findRecipe()
+    {
+        // Check featured
+
+    }
+
     render() {
         return (
             <div className="variable-recipe">

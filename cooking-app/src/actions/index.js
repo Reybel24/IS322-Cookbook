@@ -89,13 +89,12 @@ export const getFeaturedRecipes = (allItemsList, featured) => {
                     // Add to list
                     featured.push(response.data);
                     console.log("added");
+                    dispatch(featuredLoadingSuccess(featured));
                 }).catch(error => {
                 //dispatch(featuredLoadingError(error.response.data.message));
                 console.log(error);
             });
         }
-        dispatch(featuredLoadingSuccess(featured));
-
     };
 };
 

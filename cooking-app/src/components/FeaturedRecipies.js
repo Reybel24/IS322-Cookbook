@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from "../actions";
+import {Link} from "react-router-dom";
 
 // Due to very limited allowed usage of the Spponaculra API (50 requests per day), we will give the food
 // metadata in here and check it locally toa void having to send a request per food item to the api to
@@ -30,12 +31,15 @@ class FeaturedRecipies extends React.Component {
 
     renderBody() {
         return <div>
-            <div> {this.props.featuredRecipes.map((recipe) => {
+            <h3 id="featured-head">Here are some featured recipes for you to check out</h3>
+            <div id="featured-container"> {this.props.featuredRecipes.map((recipe) => {
                 return (
-                    <div key={recipe.id}>
-                        <img src={recipe.image} alt={recipe.name} />
-                        <p> {recipe.title} </p>
-                    </div>
+                    <Link to={'/VariableRecipe/' + recipe.id}>
+                        <div key={recipe.id} class="featured-recipe">
+                            <p class="featured-name">{recipe.title}</p>
+                            <img class="featured-image" src={recipe.image} alt={recipe.name} />
+                        </div>
+                    </Link>
                 )
             })} </div>
         </div>
@@ -44,8 +48,7 @@ class FeaturedRecipies extends React.Component {
     }
 
     render() {
-
-        return this.props.errorMessage || (this.props.featuredRecipies == null) ? <div>{this.props.errorMessage}</div> : this.renderBody();
+        return (this.props.errorMessage != null) ? <div>{this.props.errorMessage}</div> : this.renderBody();
     }
 
 }
@@ -53,7 +56,11 @@ class FeaturedRecipies extends React.Component {
 const mapStateToProps = (state) => {
     if (state.featuredRecipies.featuredRecipes.length > 0)
     {
-        console.log("recipes: ", state.featuredRecipies.featuredRecipes);
+        console.log("recipes: ", state.featuredRecipies.featuredRecipes[0]['recipes']);
+        return {
+            errorMessage: null,
+            featuredRecipes: state.featuredRecipies.featuredRecipes[0]['recipes']
+        };
     }
 
     return {

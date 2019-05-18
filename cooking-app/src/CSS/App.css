@@ -114,6 +114,35 @@ button:hover {
     margin-bottom: 50px;
 }
 
+/* Home page styling */
+#featured-container {
+    width: 70%;
+    margin: 0 auto;
+    padding-top:50px;
+}
+#featured-head {
+    color: grey;
+    font-size: 30px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+}
+.featured-recipe {
+    width: 25%;
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+}
+.featured-name {
+    color: grey;
+    font-size: 20px;
+}
+.featured-image {
+    width: 90%;
+    margin: 0 auto;
+}
+
 /*FOOTER STYLE*/
 .footer {
     position: fixed;
