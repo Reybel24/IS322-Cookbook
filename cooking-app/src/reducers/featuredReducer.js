@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const DEFAULT_STATE = {
-    featuredRecipies: [],
+    visibilityFilter: [],
+    featuredRecipes: [],
     errorMessage: null
 };
 
@@ -10,7 +11,7 @@ const featuredReducer = (state = DEFAULT_STATE, action) => {
         case actionTypes.FEATURED_LOADED_SUCCESS:
             return {
                 ...state,
-                featuredRecipies: action.payload,
+                featuredRecipes: action.payload,
                 errorMessage: null
             };
         case actionTypes.FEATURED_LOADED_ERROR:
@@ -18,6 +19,12 @@ const featuredReducer = (state = DEFAULT_STATE, action) => {
                 ...state,
                 errorMessage: action.payload,
                 featuredRecipies: []
+            }
+        case actionTypes.SET_VISIBILITY_FILTER:
+            console.log("B");
+            return {
+                ...state,
+                visibilityFilter: action.payload
             }
 
         default:
