@@ -21,6 +21,7 @@ class VariableRecipe extends React.Component {
             {
                 console.log("found it");
                 this.setState({ recipe:  this.props.featuredRecipes[i]['recipes']})
+                return;
             }
             else {
                 console.log("Not found");
