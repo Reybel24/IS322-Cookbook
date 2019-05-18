@@ -76,7 +76,7 @@ const nutritionsLoadingSuccess  = nutritions => {
 // Featured recipes action
 export const getFeaturedRecipes = (featured) => {
     return (dispatch) => {
-        for (var i=0; i < 1; i++)
+        for (var i=0; i < 2; i++)
         {
             axios.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1&tags=vegetarian%2Cdessert",
                 {
@@ -121,15 +121,11 @@ const featuredLoadingError = errorMessage => {
 export const setVisibilityFilter = (filter) => {
     console.log("Filters set to show: ", filter);
     return (dispatch) => {
-        console.log("HEYY");
-        // filter items based on filter here
-
         filterSuccess(filter);
     };
 };
 
 const filterSuccess = filter => {
-    console.log("GGG");
     return {
         type: actionTypes.SET_VISIBILITY_FILTER,
         payload: filter
