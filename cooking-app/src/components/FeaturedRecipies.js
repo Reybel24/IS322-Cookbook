@@ -3,15 +3,6 @@ import {connect} from 'react-redux';
 import * as actions from "../actions";
 import {Link} from "react-router-dom";
 
-// Due to very limited allowed usage of the Spponaculra API (50 requests per day), we will give the food
-// metadata in here and check it locally toa void having to send a request per food item to the api to
-// see if it fits the filter
-const allItemsList = [
-    ['burger', 'gluten_free, sugar_free'],
-    ['chickenburritos', 'gluten_free, sugar_free'],
-    ['chickenfingers', 'gluten_free']
-];
-
 // Next: whenever any filter changes -> set new filters in 'filters' -> iterate through pick 3 random items from
 // allItemsList that match the filters -> request item information (name, photo, calories) from API -> display them in grid
 
@@ -22,7 +13,7 @@ class FeaturedRecipies extends React.Component {
     };
 
     triggerChange() {
-        this.props.getFeaturedRecipes(allItemsList, this.state.featured);
+        this.props.getFeaturedRecipes(this.state.featured);
     }
 
     componentDidMount() {
@@ -34,12 +25,12 @@ class FeaturedRecipies extends React.Component {
             <h3 id="featured-head">Here are some featured recipes for you to check out</h3>
             <div id="featured-container"> {this.props.featuredRecipes.map((recipe) => {
                 return (
-                    <Link to={'/VariableRecipe/' + recipe.id}>
-                        <div key={recipe.id} class="featured-recipe">
-                            <p class="featured-name">{recipe.title}</p>
-                            <img class="featured-image" src={recipe.image} alt={recipe.name} />
+                        <div class="featured-recipe" key={recipe['recipes'][0].id}>
+                            <Link to={'/VariableRecipe/' + recipe['recipes'][0].id}>
+                                <p class="featured-name">{recipe['recipes'][0].title}</p>
+                                <img class="featured-image" src={recipe['recipes'][0].image} alt={recipe['recipes'][0].name} />
+                            </Link>
                         </div>
-                    </Link>
                 )
             })} </div>
         </div>
@@ -56,10 +47,10 @@ class FeaturedRecipies extends React.Component {
 const mapStateToProps = (state) => {
     if (state.featuredRecipies.featuredRecipes.length > 0)
     {
-        console.log("recipes: ", state.featuredRecipies.featuredRecipes[0]['recipes']);
+        console.log("recipes: ", state.featuredRecipies.featuredRecipes);
         return {
             errorMessage: null,
-            featuredRecipes: state.featuredRecipies.featuredRecipes[0]['recipes']
+            featuredRecipes: state.featuredRecipies.featuredRecipes
         };
     }
 
@@ -71,7 +62,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getFeaturedRecipes: (allItemsList, featured) => dispatch(actions.getFeaturedRecipes(allItemsList, featured))
+        getFeaturedRecipes: (featured) => dispatch(actions.getFeaturedRecipes(featured))
     }
 };
 

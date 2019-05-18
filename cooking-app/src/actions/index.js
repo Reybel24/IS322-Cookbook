@@ -74,7 +74,7 @@ const nutritionsLoadingSuccess  = nutritions => {
 
 
 // Featured recipes action
-export const getFeaturedRecipes = (allItemsList, featured) => {
+export const getFeaturedRecipes = (featured) => {
     return (dispatch) => {
         for (var i=0; i < 1; i++)
         {

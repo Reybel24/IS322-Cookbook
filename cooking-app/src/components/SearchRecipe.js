@@ -41,31 +41,31 @@ class SearchRecipe extends React.Component {
 
     renderBody() {
         return (
-        <div className={'page-body-container'}>
-            <div className={'title-container'}>
-                <h1 className={'page-title'}> Search Thousands of Recipes By Ingredients </h1>
-            </div>
+            <div className={'page-body-container'}>
+                <div className={'title-container'}>
+                    <h1 className={'page-title'}> Search Thousands of Recipes By Ingredients </h1>
+                </div>
                 <div className={'search-bar'}>
                     <input type={"text"}
                            placeholder={'Enter An Ingredient...'}
-                         value={this.state.searchPhrase}
-                         onKeyDown={event=>this.handleKeyDown(event)}
-                         onChange={event=>this.handleChange(event.target.value)}/>
+                           value={this.state.searchPhrase}
+                           onKeyDown={event=>this.handleKeyDown(event)}
+                           onChange={event=>this.handleChange(event.target.value)}/>
                 </div>
 
-            <div className={'results'}> {this.props.recipies.map((recipe) => {
-                return (
-                    <div className={'recipe-box'} key={recipe.id}>
-                        <img src={recipe.image} alt={recipe.name} className={'recipe_image'} />
-                        <Link to={'/VariableRecipe/' + recipe.id}> <p className={'recipe-title'}> {recipe.title} </p> </Link>
-                    </div>
-                )
-            })} </div>
+                <div className={'results'}> {this.props.recipies.map((recipe) => {
+                    return (
+                        <div className={'recipe-box'} key={recipe.id}>
+                            <img src={recipe.image} alt={recipe.name} className={'recipe_image'} />
+                            <Link to={'/VariableRecipe/' + recipe.id}> <p className={'recipe-title'}> {recipe.title} </p> </Link>
+                        </div>
+                    )
+                })} </div>
 
-            <div className={'footer'}>
-                <p className={'footer-par'}>Project Created For IS322 | Spring 2019 </p>
-            </div>
-        </div>)
+                <div className={'footer'}>
+                    <p className={'footer-par'}>Project Created For IS322 | Spring 2019 </p>
+                </div>
+            </div>)
     }
 
     render() {
